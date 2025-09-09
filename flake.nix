@@ -8,7 +8,7 @@
     # LCARS-specific inputs
     hyprland.url = "github:hyprwm/Hyprland";
     waybar.url = "github:Alexays/Waybar";
-    wlogout.url = "github:ArtsyMacaw/wlogout";
+    # Removing wlogout as a direct input since it doesn't have a flake.nix
     
     # Security tools
     nix-security.url = "github:NixOS/nixpkgs/master";
@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, hyprland, waybar, wlogout, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, hyprland, waybar, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -217,6 +217,8 @@
         starfleet-cli = pkgs.callPackage ./pkgs/starfleet-cli { inherit nodeRoles; };
         assimilation-tools = pkgs.callPackage ./pkgs/assimilation-tools { };
         fleet-health-monitor = pkgs.callPackage ./pkgs/fleet-health-monitor { };
+        # Add wlogout as a direct package instead of a flake input
+        wlogout = pkgs.wlogout;
       };
       
       # ISO generation
