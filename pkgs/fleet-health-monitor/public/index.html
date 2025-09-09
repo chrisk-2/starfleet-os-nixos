@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfleet OS - Fleet Health Monitor</title>
+  <link rel="stylesheet" href="css/lcars.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body class="lcars-theme-starfleet">
+  <div class="lcars-container">
+    <header class="lcars-header">
+      <div class="lcars-elbow-left"></div>
+      <div class="lcars-bar horizontal">
+        <div class="lcars-title">STARFLEET OS - FLEET HEALTH MONITOR</div>
+        <div class="lcars-time" id="current-time">00:00:00</div>
+      </div>
+      <div class="lcars-elbow-right"></div>
+    </header>
+    
+    <main class="lcars-main">
+      <div class="lcars-sidebar left">
+        <div class="lcars-button" data-view="dashboard">DASHBOARD</div>
+        <div class="lcars-button" data-view="nodes">NODES</div>
+        <div class="lcars-button" data-view="alerts">ALERTS</div>
+        <div class="lcars-button" data-view="metrics">METRICS</div>
+        <div class="lcars-button" data-view="settings">SETTINGS</div>
+        <div class="lcars-button warning" data-action="scan">SCAN FLEET</div>
+        <div class="lcars-button danger" data-action="alert">RED ALERT</div>
+      </div>
+      
+      <div class="lcars-content">
+        <div class="view" id="dashboard-view">
+          <h2>Fleet Status Overview</h2>
+          
+          <div class="status-grid">
+            <div class="status-card">
+              <h3>Fleet Health</h3>
+              <div class="status-indicator" id="fleet-health-indicator">NOMINAL</div>
+              <div class="status-chart">
+                <canvas id="fleet-health-chart"></canvas>
+              </div>
+            </div>
+            
+            <div class="status-card">
+              <h3>Active Nodes</h3>
+              <div class="status-count" id="active-nodes-count">0</div>
+              <div class="status-chart">
+                <canvas id="nodes-status-chart"></canvas>
+              </div>
+            </div>
+            
+            <div class="status-card">
+              <h3>Active Alerts</h3>
+              <div class="status-count" id="active-alerts-count">0</div>
+              <div class="status-list" id="active-alerts-list">
+                <div class="empty-state">No active alerts</div>
+              </div>
+            </div>
+            
+            <div class="status-card">
+              <h3>System Resources</h3>
+              <div class="resource-meters">
+                <div class="resource-meter">
+                  <label>CPU</label>
+                  <div class="meter">
+                    <div class="meter-fill" id="cpu-meter" style="width: 0%"></div>
+                  </div>
+                  <span id="cpu-value">0%</span>
+                </div>
+                
+                <div class="resource-meter">
+                  <label>Memory</label>
+                  <div class="meter">
+                    <div class="meter-fill" id="memory-meter" style="width: 0%"></div>
+                  </div>
+                  <span id="memory-value">0%</span>
+                </div>
+                
+                <div class="resource-meter">
+                  <label>Storage</label>
+                  <div class="meter">
+                    <div class="meter-fill" id="storage-meter" style="width: 0%"></div>
+                  </div>
+                  <span id="storage-value">0%</span>
+                </div>
+                
+                <div class="resource-meter">
+                  <label>Network</label>
+                  <div class="meter">
+                    <div class="meter-fill" id="network-meter" style="width: 0%"></div>
+                  </div>
+                  <span id="network-value">0 KB/s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="view hidden" id="nodes-view">
+          <h2>Fleet Nodes</h2>
+          
+          <div class="node-filters">
+            <div class="lcars-button active" data-filter="all">ALL</div>
+            <div class="lcars-button" data-filter="bridge">BRIDGE</div>
+            <div class="lcars-button" data-filter="drone-a">DRONE-A</div>
+            <div class="lcars-button" data-filter="drone-b">DRONE-B</div>
+            <div class="lcars-button" data-filter="edge-pi">EDGE-PI</div>
+            <div class="lcars-button" data-filter="portable">PORTABLE</div>
+          </div>
+          
+          <div class="nodes-grid" id="nodes-grid">
+            <div class="empty-state">No nodes found</div>
+          </div>
+        </div>
+        
+        <div class="view hidden" id="alerts-view">
+          <h2>Fleet Alerts</h2>
+          
+          <div class="alert-filters">
+            <div class="lcars-button active" data-filter="all">ALL</div>
+            <div class="lcars-button" data-filter="critical">CRITICAL</div>
+            <div class="lcars-button" data-filter="warning">WARNING</div>
+            <div class="lcars-button" data-filter="info">INFO</div>
+          </div>
+          
+          <div class="alerts-list" id="alerts-list">
+            <div class="empty-state">No alerts found</div>
+          </div>
+        </div>
+        
+        <div class="view hidden" id="metrics-view">
+          <h2>Fleet Metrics</h2>
+          
+          <div class="metrics-controls">
+            <div class="metrics-selector">
+              <label>Metric:</label>
+              <select id="metric-select">
+                <option value="cpu">CPU Usage</option>
+                <option value="memory">Memory Usage</option>
+                <option value="disk">Disk Usage</option>
+                <option value="network">Network Traffic</option>
+                <option value="temperature">Temperature</option>
+              </select>
+            </div>
+            
+            <div class="time-range-selector">
+              <label>Time Range:</label>
+              <select id="time-range-select">
+                <option value="1">Last Hour</option>
+                <option value="6">Last 6 Hours</option>
+                <option value="24" selected>Last 24 Hours</option>
+                <option value="168">Last Week</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="metrics-chart-container">
+            <canvas id="metrics-chart"></canvas>
+          </div>
+        </div>
+        
+        <div class="view hidden" id="settings-view">
+          <h2>Fleet Settings</h2>
+          
+          <div class="settings-form">
+            <div class="settings-section">
+              <h3>Notification Settings</h3>
+              
+              <div class="settings-field">
+                <label for="alert-sound">Alert Sound:</label>
+                <input type="checkbox" id="alert-sound" checked>
+              </div>
+              
+              <div class="settings-field">
+                <label for="alert-level">Minimum Alert Level:</label>
+                <select id="alert-level">
+                  <option value="info">Info</option>
+                  <option value="warning" selected>Warning</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>Display Settings</h3>
+              
+              <div class="settings-field">
+                <label for="theme-select">LCARS Theme:</label>
+                <select id="theme-select">
+                  <option value="starfleet">Starfleet</option>
+                  <option value="section31">Section 31</option>
+                  <option value="borg">Borg</option>
+                  <option value="terran">Terran Empire</option>
+                </select>
+              </div>
+              
+              <div class="settings-field">
+                <label for="refresh-rate">Refresh Rate (seconds):</label>
+                <input type="number" id="refresh-rate" min="5" max="60" value="10">
+              </div>
+            </div>
+            
+            <div class="settings-actions">
+              <button class="lcars-button" id="save-settings">SAVE SETTINGS</button>
+              <button class="lcars-button secondary" id="reset-settings">RESET DEFAULTS</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="lcars-footer">
+      <div class="lcars-elbow-left"></div>
+      <div class="lcars-bar horizontal">
+        <div class="lcars-status" id="connection-status">CONNECTED</div>
+        <div class="lcars-version">STARFLEET OS v1.0.0</div>
+      </div>
+      <div class="lcars-elbow-right"></div>
+    </footer>
+  </div>
+  
+  <!-- Modal for node details -->
+  <div class="lcars-modal" id="node-details-modal">
+    <div class="lcars-modal-content">
+      <div class="lcars-modal-header">
+        <h3 id="node-details-title">Node Details</h3>
+        <div class="lcars-modal-close">&times;</div>
+      </div>
+      <div class="lcars-modal-body" id="node-details-body">
+        <!-- Node details will be populated here -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chart.min.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

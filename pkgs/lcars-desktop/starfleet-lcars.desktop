@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Starfleet LCARS
+Comment=LCARS Interface for Starfleet OS
+Exec=lcars-display
+Icon=lcars
+Terminal=false
+Categories=System;
+StartupNotify=true
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,83 @@
+# Starfleet OS - Device Profiles for Assimilation
+# These profiles define how different devices should be assimilated
+
+# Default profile for unknown devices
+default:
+  name: "Generic Device"
+  mode: "install"
+  partition_scheme: "standard"
+  encryption: false
+  boot_mode: "uefi"
+  packages:
+    - "lcars-desktop"
+    - "starfleet-cli"
+    - "fleet-health-monitor"
+
+# Dell OptiPlex profile
+dell_optiplex:
+  name: "Dell OptiPlex Bridge"
+  mode: "install"
+  partition_scheme: "bridge"
+  encryption: true
+  boot_mode: "uefi"
+  packages:
+    - "lcars-desktop"
+    - "starfleet-cli"
+    - "fleet-health-monitor"
+    - "lcars-compositor"
+    - "security-suite"
+  services:
+    - "lcars-display"
+    - "fleet-health"
+    - "ai-helpers"
+    - "alarm-system"
+
+# Raspberry Pi profile
+raspberry_pi:
+  name: "Edge Sensor Drone"
+  mode: "install"
+  partition_scheme: "edge-pi"
+  encryption: false
+  boot_mode: "rpi"
+  packages:
+    - "lcars-lite"
+    - "starfleet-cli"
+    - "mqtt-relay"
+    - "onvif-discovery"
+  services:
+    - "lcars-lite"
+    - "mqtt-relay"
+    - "onvif-discovery"
+    - "heartbeat"
+    - "watchdog"
+
+# Laptop profile
+laptop:
+  name: "Mobile Assimilation Unit"
+  mode: "install"
+  partition_scheme: "portable"
+  encryption: true
+  boot_mode: "uefi"
+  packages:
+    - "lcars-lite"
+    - "starfleet-cli"
+    - "assimilation-tools"
+    - "tunnel-service"
+  services:
+    - "lcars-lite"
+    - "tunnel-service"
+    - "assimilation-tools"
+
+# USB stick profile
+usb_stick:
+  name: "Portable Assimilation Device"
+  mode: "ventoy"
+  partition_scheme: "ventoy"
+  encryption: false
+  boot_mode: "hybrid"
+  iso_files:
+    - "starfleet-os-bridge.iso"
+    - "starfleet-os-drone-a.iso"
+    - "starfleet-os-drone-b.iso"
+    - "starfleet-os-edge-pi.iso"
+    - "starfleet-os-portable.iso"

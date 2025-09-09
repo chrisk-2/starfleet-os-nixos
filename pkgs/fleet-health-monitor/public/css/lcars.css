@@ -1,0 +1,345 @@
+/**
+ * LCARS (Library Computer Access/Retrieval System) CSS Framework
+ * For Starfleet OS Fleet Health Monitor
+ */
+
+:root {
+  /* Starfleet theme colors */
+  --lcars-primary: #CC99CC;
+  --lcars-secondary: #9999CC;
+  --lcars-accent: #99CCCC;
+  --lcars-background: #000033;
+  --lcars-text: #FFFFFF;
+  --lcars-warning: #FFCC99;
+  --lcars-danger: #CC6666;
+  
+  /* Layout variables */
+  --lcars-elbow-size: 2rem;
+  --lcars-bar-height: 3rem;
+  --lcars-button-width: 12rem;
+  --lcars-gap: 0.5rem;
+  --lcars-radius: 1rem;
+  --lcars-font: 'LCARS', 'Arial', sans-serif;
+}
+
+/* Theme variations */
+.lcars-theme-section31 {
+  --lcars-primary: #333333;
+  --lcars-secondary: #1a1a1a;
+  --lcars-accent: #666666;
+  --lcars-background: #000000;
+  --lcars-text: #cccccc;
+  --lcars-warning: #990000;
+  --lcars-danger: #ff0000;
+}
+
+.lcars-theme-borg {
+  --lcars-primary: #00FF00;
+  --lcars-secondary: #008800;
+  --lcars-accent: #004400;
+  --lcars-background: #000000;
+  --lcars-text: #00FF00;
+  --lcars-warning: #FFFF00;
+  --lcars-danger: #FF0000;
+}
+
+.lcars-theme-terran {
+  --lcars-primary: #FFD700;
+  --lcars-secondary: #8B4513;
+  --lcars-accent: #FF6347;
+  --lcars-background: #000000;
+  --lcars-text: #FFD700;
+  --lcars-warning: #FF4500;
+  --lcars-danger: #DC143C;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--lcars-font);
+  background-color: var(--lcars-background);
+  color: var(--lcars-text);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* LCARS Container */
+.lcars-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--lcars-gap);
+  gap: var(--lcars-gap);
+}
+
+/* LCARS Header */
+.lcars-header {
+  display: flex;
+  height: var(--lcars-bar-height);
+}
+
+.lcars-elbow-left {
+  width: var(--lcars-elbow-size);
+  height: var(--lcars-bar-height);
+  background-color: var(--lcars-primary);
+  border-top-left-radius: var(--lcars-radius);
+}
+
+.lcars-elbow-right {
+  width: var(--lcars-elbow-size);
+  height: var(--lcars-bar-height);
+  background-color: var(--lcars-primary);
+  border-top-right-radius: var(--lcars-radius);
+}
+
+.lcars-bar.horizontal {
+  flex: 1;
+  background-color: var(--lcars-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.lcars-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.lcars-time {
+  font-size: 1.2rem;
+}
+
+/* LCARS Main Content */
+.lcars-main {
+  display: flex;
+  flex: 1;
+  gap: var(--lcars-gap);
+}
+
+.lcars-sidebar {
+  width: var(--lcars-button-width);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcars-gap);
+}
+
+.lcars-sidebar.left {
+  margin-right: var(--lcars-gap);
+}
+
+.lcars-button {
+  height: 3rem;
+  background-color: var(--lcars-primary);
+  border-radius: var(--lcars-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.lcars-button:hover {
+  background-color: var(--lcars-accent);
+}
+
+.lcars-button.active {
+  background-color: var(--lcars-accent);
+}
+
+.lcars-button.warning {
+  background-color: var(--lcars-warning);
+}
+
+.lcars-button.danger {
+  background-color: var(--lcars-danger);
+}
+
+.lcars-content {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--lcars-radius);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* LCARS Footer */
+.lcars-footer {
+  display: flex;
+  height: var(--lcars-bar-height);
+}
+
+.lcars-status {
+  padding: 0.25rem 1rem;
+  background-color: var(--lcars-accent);
+  border-radius: var(--lcars-radius);
+  margin-right: 1rem;
+}
+
+.lcars-version {
+  opacity: 0.7;
+}
+
+/* LCARS Components */
+.lcars-panel {
+  background-color: var(--lcars-secondary);
+  border-radius: var(--lcars-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lcars-panel h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.lcars-divider {
+  height: 0.25rem;
+  background-color: var(--lcars-accent);
+  margin: 1rem 0;
+  border-radius: var(--lcars-radius);
+}
+
+/* LCARS Modal */
+.lcars-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.lcars-modal.active {
+  display: flex;
+}
+
+.lcars-modal-content {
+  background-color: var(--lcars-background);
+  border: 2px solid var(--lcars-primary);
+  border-radius: var(--lcars-radius);
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.lcars-modal-header {
+  background-color: var(--lcars-primary);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lcars-modal-header h3 {
+  margin: 0;
+}
+
+.lcars-modal-close {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.lcars-modal-body {
+  padding: 1rem;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.status-indicator.nominal {
+  background-color: var(--lcars-accent);
+}
+
+.status-indicator.warning {
+  background-color: var(--lcars-warning);
+}
+
+.status-indicator.critical {
+  background-color: var(--lcars-danger);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .lcars-main {
+    flex-direction: column;
+  }
+  
+  .lcars-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 0;
+    margin-bottom: var(--lcars-gap);
+  }
+  
+  .lcars-button {
+    flex: 1;
+    min-width: 120px;
+  }
+}

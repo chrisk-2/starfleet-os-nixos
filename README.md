@@ -163,6 +163,9 @@ nix build .#packages.x86_64-linux.lcars-desktop
 
 # Test configuration
 nixos-rebuild build --flake .#bridge
+
+# Run build test script
+./build-test.sh
 ```
 
 ### Contributing
@@ -180,6 +183,37 @@ nixos-rebuild build --flake .#bridge
 - **Security Tools**: Integrated pentest suite
 - **Mode System**: Dynamic operational modes
 
+### Repository Structure
+```
+starfleet-os-nixos/
+├── flake.nix              # Main flake configuration
+├── modules/               # NixOS modules
+│   ├── bridge/            # Bridge node configuration
+│   ├── common/            # Common modules
+│   ├── drone-a/           # Drone-A node configuration
+│   ├── drone-b/           # Drone-B node configuration
+│   ├── edge-pi/           # Edge-PI node configuration
+│   ├── fleet/             # Fleet management
+│   ├── hive/              # Hive architecture
+│   ├── lcars/             # LCARS interface
+│   ├── modes/             # Operational modes
+│   ├── network/           # Network configuration
+│   ├── portable/          # Portable node configuration
+│   ├── security/          # Security tools
+│   ├── sensors/           # Sensor integration
+│   └── system/            # System utilities
+├── pkgs/                  # Custom packages
+│   ├── assimilation-tools/# Hardware assimilation tools
+│   ├── fleet-health-monitor/ # Fleet monitoring dashboard
+│   ├── lcars-compositor/  # LCARS compositor
+│   ├── lcars-desktop/     # LCARS desktop environment
+│   └── starfleet-cli/     # Command-line utilities
+├── home/                  # Home-manager configurations
+├── build/                 # Build outputs
+├── docs/                  # Documentation
+└── assets/                # Images and resources
+```
+
 ## Troubleshooting
 
 ### Common Issues
@@ -193,6 +227,13 @@ nixos-rebuild build --flake .#bridge
 - **Issues**: GitHub issues
 - **Community**: Starfleet OS community
 - **IRC**: #starfleet-os on Libera.Chat
+
+## Recent Updates
+- **2025-09-09**: Added Fleet Health Monitor dashboard with LCARS UI
+- **2025-09-09**: Implemented LCARS desktop environment with Wayland compositor
+- **2025-09-09**: Added assimilation tools for hardware integration
+- **2025-09-09**: Improved build system with test script
+- **2025-09-09**: Enhanced documentation and repository structure
 
 ## License
 GPL-3.0 License - See LICENSE file for details

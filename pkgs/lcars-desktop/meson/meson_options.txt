@@ -1,0 +1,4 @@
+option('color_primary', type: 'string', value: '#CC99CC', description: 'Primary LCARS color')
+option('color_secondary', type: 'string', value: '#9999CC', description: 'Secondary LCARS color')
+option('color_accent', type: 'string', value: '#99CCCC', description: 'Accent LCARS color')
+option('color_background', type: 'string', value: '#000033', description: 'Background LCARS color')
