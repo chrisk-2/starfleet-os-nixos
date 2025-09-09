@@ -39,8 +39,9 @@
   services.ai-helpers.enable = true;
   services.alarm-system.enable = true;
   
-  # Security tools for bridge
+  # System packages: Security tools, development tools, and utilities
   environment.systemPackages = with pkgs; [
+    # Security tools
     nmap
     masscan
     hydra
@@ -49,6 +50,16 @@
     bloodhound
     wireshark
     bettercap
+    
+    # Development tools
+    git
+    vim
+    emacs
+    vscode
+    docker
+    kubectl
+    terraform
+    ansible
   ];
   
   # User configuration
@@ -65,16 +76,4 @@
       vlc
     ];
   };
-  
-  # Development tools
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    emacs
-    vscode
-    docker
-    kubectl
-    terraform
-    ansible
-  ];
 }
